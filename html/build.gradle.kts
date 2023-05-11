@@ -116,6 +116,7 @@ dependencies {
     sources(libs.regexodus)
     sources(libs.harlequin)
     sources(libs.perceptual)
+    sources(libs.visui)
 }
 
 fun DependencyHandlerScope.sources(

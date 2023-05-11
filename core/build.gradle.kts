@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.gdx.ai)
     implementation(libs.textratypist)
     implementation(libs.dagger.core)
+    implementation(libs.visui)
     api(libs.dagger.gwt)
     annotationProcessor(libs.dagger.compiler)
 }

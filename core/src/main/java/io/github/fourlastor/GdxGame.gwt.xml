@@ -3,5 +3,6 @@
 <module>
 	<super-source path="gwtCompat" />
 	<inherits name="dagger.Dagger" />
+	<inherits name='com.kotcrab.vis.vis-ui' />
 	<source path="game" />
 </module>
