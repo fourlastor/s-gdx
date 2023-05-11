@@ -43,6 +43,27 @@ public class GdxGame extends Game implements Router {
         super.render();
     }
 
+    @Override
+    public void setScreen(Screen screen) {
+        if (this.screen != null) {
+            this.screen.hide();
+            this.screen.dispose();
+        }
+        this.screen = screen;
+        if (this.screen != null) {
+            this.screen.show();
+            this.screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        if (screen != null) {
+            screen.dispose();
+        }
+    }
+
     public static GdxGame createGame() {
         return GameComponent.component().game();
     }

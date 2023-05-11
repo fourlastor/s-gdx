@@ -1,11 +1,15 @@
 package io.github.fourlastor.game.level;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import javax.inject.Inject;
 
 public class LevelScreen extends ScreenAdapter {
+
+    private static final Color CLEAR_COLOR = new Color(0xccccccff);
 
     private final Viewport viewport;
 
@@ -21,6 +25,6 @@ public class LevelScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        // game logic!
+        ScreenUtils.clear(CLEAR_COLOR, true);
     }
 }
