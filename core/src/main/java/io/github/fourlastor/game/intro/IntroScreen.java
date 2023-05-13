@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import io.github.fourlastor.game.route.Router;
-
 import javax.inject.Inject;
 
 public class IntroScreen extends ScreenAdapter {
