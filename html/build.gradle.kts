@@ -117,6 +117,7 @@ dependencies {
     sources(libs.harlequin)
     sources(libs.perceptual)
     sources(libs.visui)
+    sources(libs.squidLib.core)
 }
 
 fun DependencyHandlerScope.sources(

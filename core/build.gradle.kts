@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.textratypist)
     implementation(libs.dagger.core)
     implementation(libs.visui)
+    implementation(libs.squidLib.core)
     api(libs.dagger.gwt)
     annotationProcessor(libs.dagger.compiler)
 }
