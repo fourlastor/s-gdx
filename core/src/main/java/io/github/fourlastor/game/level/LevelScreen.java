@@ -29,7 +29,7 @@ public class LevelScreen extends ScreenAdapter {
     @Inject
     public LevelScreen(TextureAtlas atlas) {
         stage = new Stage(new FitViewport(WORLD_WIDTH, WORLD_HEIGHT));
-        snake = new Snake(stage, atlas.findRegion("whitePixel"), STEP, INITIAL_POSITION);
+        snake = new Snake(stage, atlas.findRegion("whitePixel"), STEP, INITIAL_POSITION, WORLD_WIDTH, WORLD_HEIGHT);
         fruit = new Image(new TextureRegionDrawable(atlas.findRegion("whitePixel")).tint(Color.CORAL));
         moveFruitToRandomPosition();
         stage.addActor(fruit);

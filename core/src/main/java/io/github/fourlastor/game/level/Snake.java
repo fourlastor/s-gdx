@@ -17,14 +17,18 @@ public class Snake {
     private final Array<Image> images;
     private final Drawable snakeImage;
     private final float step;
+    private final int worldWidth;
+    private final int worldHeight;
 
     private Direction direction = Direction.NORTH;
     private float stepAccumulator;
 
-    public Snake(Stage stage, TextureRegion snakeImage, float step, Vector2 initialPosition) {
+    public Snake(Stage stage, TextureRegion snakeImage, float step, Vector2 initialPosition, int worldWidth, int worldHeight) {
         this.stage = stage;
         this.snakeImage = new TextureRegionDrawable(snakeImage);
         this.step = step;
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
         positions = new Array<>();
         images = new Array<>();
         grow();
@@ -64,6 +68,16 @@ public class Snake {
         }
         Vector2 head = positions.get(0);
         head.add(x, y);
+        if (head.x >= worldWidth) {
+            head.x = 0;
+        } else if (head.x < 0) {
+            head.x = worldWidth - 1;
+        }
+        if (head.y >= worldHeight) {
+            head.y = 0;
+        } else if (head.y < 0) {
+            head.y = worldHeight - 1;
+        }
     }
 
     private Direction updateDirection() {
