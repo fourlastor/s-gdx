@@ -14,7 +14,7 @@ import squidpony.squidmath.SilkRNG;
 
 public class LevelScreen extends ScreenAdapter {
 
-    private static final float STEP = 1f / 5f;
+    private static final float STEP = 1f / 10f;
     private static final Color CLEAR_COLOR = new Color(0x333333ff);
     private static final int WORLD_WIDTH = 16;
     private static final int WORLD_HEIGHT = 10;
@@ -43,17 +43,22 @@ public class LevelScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(CLEAR_COLOR, true);
-        snake.act(delta);
         if (snakeOnFruit()) {
             snake.grow();
             moveFruitToRandomPosition();
         }
+        snake.act(delta);
         stage.act();
         stage.draw();
     }
 
     private void moveFruitToRandomPosition() {
-        fruit.setPosition(random.between(0, WORLD_WIDTH - 1), random.between(0, WORLD_HEIGHT - 1));
+        float x, y;
+        do {
+            x = random.between(0, WORLD_WIDTH - 1);
+            y = random.between(0, WORLD_HEIGHT - 1);
+        } while (snake.contains(x, y));
+        fruit.setPosition(x, y);
     }
 
     private boolean snakeOnFruit() {

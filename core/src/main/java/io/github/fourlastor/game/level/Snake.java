@@ -84,6 +84,15 @@ public class Snake {
         return positions.get(0);
     }
 
+    public boolean contains(float x, float y) {
+        for (Vector2 position : positions) {
+            if (position.x == x && position.y == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     enum Direction {
         NORTH(new Vector2(0, 1)),
         EAST(new Vector2(1, 0)),
