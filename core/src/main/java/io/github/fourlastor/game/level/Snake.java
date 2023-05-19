@@ -21,6 +21,7 @@ public class Snake {
     private final int worldHeight;
 
     private Direction direction = Direction.NORTH;
+    private Direction movementDirection = direction;
     private float stepAccumulator;
 
     public Snake(Stage stage, TextureRegion snakeImage, float step, Vector2 initialPosition, int worldWidth, int worldHeight) {
@@ -62,6 +63,7 @@ public class Snake {
     }
 
     private void moveTowards(float x, float y) {
+        movementDirection = direction;
         for (int i = positions.size - 1; i > 0; i--) {
             Vector2 previousPosition = positions.get(i - 1);
             positions.get(i).set(previousPosition);
@@ -81,13 +83,13 @@ public class Snake {
     }
 
     private Direction updateDirection() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && movementDirection != Direction.SOUTH) {
             return Direction.NORTH;
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && movementDirection != Direction.NORTH) {
             return Direction.SOUTH;
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && movementDirection != Direction.WEST) {
             return Direction.EAST;
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && movementDirection != Direction.EAST) {
             return Direction.WEST;
         } else {
             return direction;
