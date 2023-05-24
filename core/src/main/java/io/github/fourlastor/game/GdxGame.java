@@ -31,7 +31,7 @@ public class GdxGame extends Game implements Router {
     @Override
     public void create() {
         Gdx.input.setInputProcessor(multiplexer);
-        goToIntro();
+        goToLevel();
     }
 
     @Override

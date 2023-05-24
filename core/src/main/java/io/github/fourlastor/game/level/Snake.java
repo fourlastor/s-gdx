@@ -23,6 +23,7 @@ public class Snake {
     private Direction direction = Direction.NORTH;
     private Direction movementDirection = direction;
     private float stepAccumulator;
+    private Vector2 growPosition;
 
     public Snake(Stage stage, TextureRegion snakeImage, float step, Vector2 initialPosition, int worldWidth, int worldHeight) {
         this.stage = stage;
@@ -32,18 +33,21 @@ public class Snake {
         this.worldHeight = worldHeight;
         positions = new Array<>();
         images = new Array<>();
-        grow();
-        positions.get(0).set(initialPosition);
+        addToBody(initialPosition);
     }
 
     public void grow() {
-        Image image = new Image(snakeImage);
         Vector2 position = new Vector2();
         int count = positions.size;
         if (count > 0) {
             Vector2 last = positions.get(count - 1);
             position.set(last);
         }
+        growPosition = position;
+    }
+
+    private void addToBody(Vector2 position) {
+        Image image = new Image(snakeImage);
         images.add(image);
         positions.add(position);
         stage.addActor(image);
@@ -55,6 +59,10 @@ public class Snake {
         while (stepAccumulator >= step) {
             moveTowards(direction.value.x, direction.value.y);
             stepAccumulator -= step;
+            if (growPosition != null) {
+                addToBody(growPosition);
+                growPosition = null;
+            }
         }
         for (int i = 0; i < positions.size; i++) {
             Vector2 position = positions.get(i);
@@ -101,7 +109,13 @@ public class Snake {
     }
 
     public boolean contains(float x, float y) {
-        for (Vector2 position : positions) {
+        return contains(x, y, false);
+    }
+
+    public boolean contains(float x, float y, boolean excludeHead) {
+        int start = excludeHead ? 1 : 0;
+        for (int i = start; i < positions.size; i++) {
+            Vector2 position = positions.get(i);
             if (position.x == x && position.y == y) {
                 return true;
             }
