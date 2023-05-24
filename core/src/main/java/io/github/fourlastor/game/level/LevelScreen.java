@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -41,6 +42,7 @@ public class LevelScreen extends ScreenAdapter {
     private final Image fruit;
     private final BitmapFont font;
     private final Music music;
+    private final Sound eatSound;
 
     private boolean gameOver;
 
@@ -55,6 +57,7 @@ public class LevelScreen extends ScreenAdapter {
         uiStage = new Stage(new FitViewport(UI_WIDTH, UI_HEIGHT));
         font = new BitmapFont(Gdx.files.internal("fonts/quan-pixel-32.fnt"));
         music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/bg.mp3"));
+        eatSound = Gdx.audio.newSound(Gdx.files.internal("audio/sounds/eat.ogg"));
         music.setLooping(true);
     }
 
@@ -79,6 +82,7 @@ public class LevelScreen extends ScreenAdapter {
     public void render(float delta) {
         ScreenUtils.clear(CLEAR_COLOR, true);
         if (snakeOnFruit()) {
+            eatSound.play();
             snake.grow();
             moveFruitToRandomPosition();
         }
