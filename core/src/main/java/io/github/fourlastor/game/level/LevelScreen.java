@@ -3,6 +3,7 @@ package io.github.fourlastor.game.level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -39,6 +40,7 @@ public class LevelScreen extends ScreenAdapter {
     private final Snake snake;
     private final Image fruit;
     private final BitmapFont font;
+    private final Music music;
 
     private boolean gameOver;
 
@@ -52,11 +54,25 @@ public class LevelScreen extends ScreenAdapter {
         stage.addActor(fruit);
         uiStage = new Stage(new FitViewport(UI_WIDTH, UI_HEIGHT));
         font = new BitmapFont(Gdx.files.internal("fonts/quan-pixel-32.fnt"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/bg.mp3"));
+        music.setLooping(true);
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        music.play();
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        music.stop();
     }
 
     @Override
