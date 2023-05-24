@@ -43,6 +43,7 @@ public class LevelScreen extends ScreenAdapter {
     private final BitmapFont font;
     private final Music music;
     private final Sound eatSound;
+    private final Sound loseSound;
 
     private boolean gameOver;
 
@@ -58,6 +59,7 @@ public class LevelScreen extends ScreenAdapter {
         font = new BitmapFont(Gdx.files.internal("fonts/quan-pixel-32.fnt"));
         music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/bg.mp3"));
         eatSound = Gdx.audio.newSound(Gdx.files.internal("audio/sounds/eat.ogg"));
+        loseSound = Gdx.audio.newSound(Gdx.files.internal("audio/sounds/lose.ogg"));
         music.setLooping(true);
     }
 
@@ -96,6 +98,7 @@ public class LevelScreen extends ScreenAdapter {
             label.setPosition(UI_WIDTH / 2, -UI_HEIGHT / 2, Align.center);
             label.addAction(Actions.moveToAligned(UI_WIDTH / 2, UI_HEIGHT / 2, Align.center, 2));
             uiStage.addActor(label);
+            loseSound.play();
         }
         if (!gameOver) {
             snake.act(delta);
